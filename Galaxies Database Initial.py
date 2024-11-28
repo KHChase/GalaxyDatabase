@@ -39,23 +39,24 @@ def csv_to_hash(file_path, index_cols):
 
 
 #main function
+def main():
+    file_path = 'Galaxy.csv'
+    
+    #columns to search by
+    index_cols = ['Galaxy', 'Seyfert_Type', 'PlateScale', 'pc_arcsecond', 'Redshift', 'Distance_Mpc', 'Xray_Lum14195kev', 'ColumnDensity_LognH', 'Obs_date', 'PSF']
 
-file_path = 'Galaxy.csv'
+    hash_tables = csv_to_hash(file_path, index_cols)
 
-#columns to search by
-index_cols = ['Galaxy', 'Seyfert_Type', 'PlateScale', 'pc_arcsecond', 'Redshift', 'Distance_Mpc', 'Xray_Lum14195kev', 'ColumnDensity_LognH', 'Obs_date', 'PSF']
+    search_galaxy = 'Circinus'
+    result = hash_tables['Galaxy'].search(search_galaxy)
 
-hash_tables = csv_to_hash(file_path, index_cols)
+    if result:
+        print(result)
 
-search_galaxy = 'Circinus'
-result = hash_tables['Galaxy'].search(search_galaxy)
+    else:
+        print(f"No results found for '{search_galaxy}'")
 
-if result:
-    print(result)
-
-else:
-    print(f"No results found for '{search_galaxy}'")
-
+if __name__ == "__main__": main()
 
 
 
