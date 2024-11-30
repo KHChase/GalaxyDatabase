@@ -33,3 +33,16 @@ def searchCase(choice, element, hash_tables):
         else:
 
             print(f"\nHeader \'{element}\' not found in the hash tables.")
+
+# searches data column for data within given range (inclusive)
+# returns list of galaxies whose measurements fit range
+# uses hash_tables version from my csv_operations.py update pull request
+def rangeSearch(attribute, lower, upper, hash_tables):
+    galaxies = []
+    data = hash_tables[attribute].column()
+    for i in data:
+        num = float(i)
+        if num >= lower and num <= upper:
+            for j in hash_tables[attribute].search(i):
+                galaxies.append(j)
+    return galaxies
