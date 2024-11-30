@@ -14,7 +14,10 @@ def csv_to_hash(file_path, index_cols):
                 # only insert if key is not None or empty
                 key = row.get(col)
                 if key:
-                    hash_tables[col].insert(key, row)
+                    if col == index_cols[0]:
+                        hash_tables[col].insert(key, row)
+                    else:
+                        hash_tables[col].insert(key, row.get(index_cols[0]))
 
     return hash_tables
 
