@@ -3,11 +3,11 @@ import csv
 from hash_table import HashTable
 
 #converts csv to hash table(s) to only have to load once
-def csv_to_hash(file_path, index_cols):
-    hash_tables = {col: HashTable() for col in index_cols}
-
+def csv_to_hash(file_path):
     with open(file_path, mode='r') as csv_file:
         reader = csv.DictReader(csv_file)
+        index_cols = reader.fieldnames
+        hash_tables = {col: HashTable() for col in index_cols}
 
         for row in reader:
             for col in index_cols:
