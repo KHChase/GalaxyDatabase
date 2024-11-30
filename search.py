@@ -21,15 +21,16 @@ def searchCase(choice, element, hash_tables):
             print(f"\nNO RESULTS FOUND FOR: \'{element}\'")
             print("----------------------------------------------------")  
 
-    elif choice == 2:  # searching by header (column title)
-        if element in hash_tables:
+#commenting out for time being   
+# elif choice == 2:  # searching by header (column title)
+        #if element in hash_tables:
 
-            print(f"\nData for header: {element}")
-            print("----------------------------------------------------")
+           # print(f"\nData for header: {element}")
+            #print("----------------------------------------------------")
 
-            for key, rows in hash_tables[element].table.items():
-                for row in rows:
-                    print(f"{element} for \"{row['Galaxy']}\": {row[element]}")
-        else:
+            #for key, rows in hash_tables[element].table.items():
+               # for row in rows:
+                   # print(f"{element} for \"{row['Galaxy']}\": {row[element]}")
+       # else:
 
-            print(f"\nHeader \'{element}\' not found in the hash tables.")
+            #print(f"\nHeader \'{element}\' not found in the hash tables.")
