@@ -1,7 +1,11 @@
 
 from csv_operations import write_to_csv
 
-def add_update(hash_tables, index_cols, file_path):
+def add_update(hash_tables, file_path):
+    index_cols = []
+    for col in hash_tables:
+        index_cols.append(col)
+    
     print("\nWould you like to add a new galaxy or update an existing one?")
     print("1. Add a new galaxy")
     print("2. Update an existing galaxy")
