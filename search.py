@@ -33,8 +33,7 @@ def searchCase(choice, element, hash_tables):
                    # print(f"{element} for \"{row['Galaxy']}\": {row[element]}")
        # else:
 
- KHChase-search.py-rangeSearch
-            print(f"\nHeader \'{element}\' not found in the hash tables.")
+                #print(f"\nHeader \'{element}\' not found in the hash tables.")
 
 # searches data column for data within given range (inclusive)
 # returns list of galaxies whose measurements fit range
@@ -48,6 +47,3 @@ def rangeSearch(attribute, lower, upper, hash_tables):
             for j in hash_tables[attribute].search(i):
                 galaxies.append(j)
     return galaxies
-=======
-            #print(f"\nHeader \'{element}\' not found in the hash tables.")
- main
