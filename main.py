@@ -7,12 +7,14 @@ from add_update import add_update
 def main():
     file_path = 'Galaxy.csv'
 
-    # columns to be able to search by
-    index_cols = ['Galaxy', 'Seyfert_Type', 'PlateScale', 'pc_arcsecond', 'Redshift', 'Distance_Mpc', 'Xray_Lum14195kev', 'ColumnDensity_LognH', 'Obs_date', 'PSF']
-
     # converting csv to hash table
     hash_tables = csv_to_hash(file_path)
 
+    # columns to be able to search by
+    index_cols = []
+    for col in hash_tables:
+        index_cols.append(col)
+    
     # while loop for initial user selection
     selection = 0
     while (selection != -1):
