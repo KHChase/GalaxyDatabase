@@ -5,16 +5,16 @@ def searchCase(choice, element, hash_tables):
         if choice == 1:
 
     #search_galaxy = 'Circinus'
-        result = hash_tables['Galaxy'].search(element)
+                result = hash_tables['Galaxy'].search(element)
 
     #if found, print entire results
-        if result:
-            for row in result:
-                print("\n********************************************************")
-                for header in row:
-                    print(header, ": ", row[header])
-                print("\n********************************************************")
-    
+                if result:
+                    for row in result:
+                        print("\n********************************************************")
+                        for header in row:
+                            print(header, ": ", row[header])
+                        print("\n********************************************************")
+            
     
         #if not found, prints message
         else:
