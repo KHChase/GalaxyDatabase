@@ -18,11 +18,12 @@ class HashTable:
 
 
 #converts csv to hash table(s) to only have to load once
-def csv_to_hash(file_path, index_cols):
-    hash_tables = {col: HashTable() for col in index_cols}
-
+def csv_to_hash(file_path):
     with open(file_path, mode='r') as csv_file:
         reader = csv.DictReader(csv_file)
+        
+        index_cols = reader.fieldnames
+        hash_tables = {col: HashTable() for col in index_cols}
 
         for row in reader:
             for col in index_cols:
@@ -47,29 +48,8 @@ def searchCase(choice, element, hash_tables):
         if result:
             for row in result:
                 print("\n********************************************************")
-                print("Galaxy: ", row['Galaxy'])
-                print("Seyfert Type: ", row['Seyfert_Type'])
-                print("Plate Scale: ", row['PlateScale'])
-                print("pc/\": ", row['pc_arcsecond'], )
-                print("Redshift: ", row['Redshift'])
-                print("Distance: ", row['Distance_Mpc'])
-                print("X-ray: ", row['Xray_Lum14195kev'])
-                print("Column-Density: ", row['Column_Density_LognH'])
-                print("Obs_date: ", row['Obs_date'])
-                print("PSF: ", row['PSF'
-                ])
-                print("\nCentral 200 pc Log[Luminosity]")
-                print("------------------------------------")
-                print("H2 (erg/s): ", row['H2 (erg/s)(Central 200 pc Log[Luminosity])'])
-                print("[Si VI (erg/s): ", row['[Si VI] (erg/s)(Central 200 pc Log[Luminosity])'])
-                print("Br-Ga (erg/s): ", row['Br-Ga (erg/s)(Central 200 pc Log[Luminosity])'])
-
-                print("\nHWHM")
-                print("------------------------------------")
-                print("H2(pc): ", row['H2 (pc) (HWHM)'])
-                print("[Si VI](pc): ", row['[Si VI] (pc)(HWHM)'])
-                print("Br-Ga(pc): ", row['Br-Ga (pc)(HWHM)'])
-
+                for header in row:
+                    print(header, ": ", row[header])
                 print("\n********************************************************")
 
 
@@ -84,11 +64,8 @@ def main():
 
     file_path = 'Galaxy.csv'
 
-    #columns to be able to search by
-    index_cols = ['Galaxy', 'Seyfert_Type', 'PlateScale', 'pc_arcsecond', 'Redshift', 'Distance_Mpc', 'Xray_Lum14195kev', 'ColumnDensity_LognH', 'Obs_date', 'PSF']
-
     #converting csv to hash table
-    hash_tables = csv_to_hash(file_path, index_cols)
+    hash_tables = csv_to_hash(file_path)
 
 
 
