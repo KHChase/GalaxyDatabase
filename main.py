@@ -11,7 +11,7 @@ def main():
     index_cols = ['Galaxy', 'Seyfert_Type', 'PlateScale', 'pc_arcsecond', 'Redshift', 'Distance_Mpc', 'Xray_Lum14195kev', 'ColumnDensity_LognH', 'Obs_date', 'PSF']
 
     # converting csv to hash table
-    hash_tables = csv_to_hash(file_path, index_cols)
+    hash_tables = csv_to_hash(file_path)
 
     # while loop for initial user selection
     selection = 0
