@@ -78,3 +78,17 @@ def rangeSearch(attribute, lower, upper, hash_tables):
             print(g)
                 
     return galaxies
+
+# searches data column for data within given value
+# returns list of galaxies that has value
+def matchSearch(attribute, target, hash_tables):
+    galaxies = []
+    data = hash_tables[attribute].column()
+
+    for i in data:
+        # since this is checking strings it should
+        if i == target:
+            for j in hash_tables[attribute].search(i):
+                galaxies.append(j)
+
+    return galaxies
