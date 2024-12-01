@@ -1,6 +1,7 @@
 
 from csv_operations import csv_to_hash
 from search import searchCase
+from search import rangeSearch
 from add_update import add_update
 
 
