@@ -1,3 +1,13 @@
+'''
+    searches
+        galSearch - return data for one galaxy
+        colSearch - return data for one column
+        
+        rangeSearch - return all galaxies with values in range
+        matchSearch - return all galaxies with values that match
+        crossSearch - multiple of these
+'''
+
 
 # Searching Function
 def searchCase(choice, element, hash_tables):
