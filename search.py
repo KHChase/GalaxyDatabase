@@ -9,6 +9,27 @@
         crossSearch - multiple of these
 '''
 
+# walks user through searching
+def perform(hash_tables):
+    # FIXME: prompt user to input their preferred search
+    choice = int(input())
+    match choice:
+        case 1:
+            results = galSearch(g, hash_tables)
+        case 2:
+            results = colSearch(a, hash_tables)
+        case 3:
+            results = valSearch(g, a, hash_tables)
+        case 4:
+            results = crossSearch(hash_tables)
+            choice2 = int(input("Print galaxies found?"))
+            if choice2 == 1:
+                for r in results:
+                    galSearch(r, hash_tables)
+    return results
+    
+
+
 # prints and returns all data for one galaxy
 def galSearch(galaxy, hash_tables):
     try:
@@ -27,7 +48,11 @@ def galSearch(galaxy, hash_tables):
 # returns all data from one column
 # not the same as returning the column, this is a List and not part of a HashTable
 def colSearch(attribute, hash_tables):
-    result = hash_tables[attribute].column()
+    try:
+        result = hash_tables[attribute].column()
+    except KeyError:
+        print("ERROR: ", attribute, "not in database.")
+
     vals = []
     for i in result:
         for j in hash_tables[attribute].search(i):
@@ -87,7 +112,10 @@ def rangeSearch(attribute, lower, upper, hash_tables):
 # returns list of galaxies that has value
 def matchSearch(attribute, target, hash_tables):
     galaxies = []
-    data = hash_tables[attribute].column() # FIXME: KeyError
+    try:
+        data = hash_tables[attribute].column()
+    except KeyError:
+        print("ERROR: ", attribute, "not in database.")
 
     for i in data:
         # since this is checking strings it should
