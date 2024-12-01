@@ -1,7 +1,6 @@
 
 from csv_operations import csv_to_hash
-from search import searchCase
-from search import rangeSearch
+import search
 from add_update import add_update
 
 
@@ -46,7 +45,8 @@ def main():
                     print("Invalid choice. Returning to menu.")
                     continue
 
-                searchCase(choice, element, hash_tables)
+                # this function doesn't exist anymore
+                #searchCase(choice, element, hash_tables)
 
             # Adding/Updating
             case 2:
