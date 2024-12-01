@@ -13,3 +13,6 @@ class HashTable:
     # searching hash table
     def search(self, key):
         return self.table.get(key, None)
+
+    def column(self):
+        return self.table
