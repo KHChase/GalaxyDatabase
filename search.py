@@ -89,4 +89,28 @@ def colSearch(attribute, hash_tables):
             vals.append(i)
     return vals
 
-
+# returns list of galaxies that fit multiple matchSearch / rangeSearch
+# user refines search in steps
+def crossSearch(hash_tables):
+    limit_tables = hash_tables
+    exit = False
+    while not exit:
+        # FIXME: prompt user to do stuff
+        
+        # perform limiting search
+        match choice:
+            case 1:
+                results = rangeSearch(attribute, lower, upper, limit_tables)
+            case 2:
+                results = matchSearch(attribute, target, limit_tables)
+                
+        # update limit_tables to reflect search
+        for table in limit_tables:
+            try:
+                results.remove(table)
+            except ValueError:
+                limit_tables.pop(table)
+    galaxies = []
+    for g in limit_tables['Galaxy'].column():
+        galaxies.append(g)
+    return galaxies
