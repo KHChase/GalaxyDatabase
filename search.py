@@ -78,6 +78,19 @@ def rangeSearch(attribute, lower, upper, hash_tables):
             print(g)
                 
     return galaxies
+    
+# returns all data from one column
+# not the same as returning the column, this is a List and not part of a HashTable
+def colSearch(attribute, hash_tables):
+    result = hash_tables[attribute].column()
+    vals = []
+    for i in result:
+        for j in hash_tables[attribute].search(i):
+            vals.append(i)
+    return vals
+
+
+
 
 # searches data column for data within given value
 # returns list of galaxies that has value
