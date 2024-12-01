@@ -1,47 +1,53 @@
 '''
     searches
+        galSearch - return data for one galaxy
         colSearch - return data for one column
+        valSearch - return a specific value for a specific galaxy
+        
         rangeSearch - return all galaxies with values in range
         matchSearch - return all galaxies with values that match
-        crossSearch - multiple overlapping rangeSearch and matchSearch
+        crossSearch - multiple of these
 '''
 
+# prints and returns all data for one galaxy
+def galSearch(galaxy, hash_tables):
+    try:
+        result = hash_tables['Galaxy'].search(galaxy)
+        for row in result:
+            print("\n********************************************************")
+            for header in row:
+                print(header, ": ", row[header])
+            print("\n********************************************************")
+        return result;
+    except TypeError:
+        print("ERROR: Galaxy ", galaxy, " is not in database.")
+        return
 
-# Searching Function
-def searchCase(choice, element, hash_tables):
 
-        if choice == 1:
-
-    #search_galaxy = 'Circinus'
-                result = hash_tables['Galaxy'].search(element)
-
-    #if found, print entire results
-                if result:
-                    for row in result:
-                        print("\n********************************************************")
-                        for header in row:
-                            print(header, ": ", row[header])
-                        print("\n********************************************************")
-            
+# returns all data from one column
+# not the same as returning the column, this is a List and not part of a HashTable
+def colSearch(attribute, hash_tables):
+    result = hash_tables[attribute].column()
+    vals = []
+    for i in result:
+        for j in hash_tables[attribute].search(i):
+            vals.append(i)
+    return vals
     
-        #if not found, prints message
-        else:
-            print(f"\nNO RESULTS FOUND FOR: \'{element}\'")
-            print("----------------------------------------------------")  
 
-#commenting out for time being   
-# elif choice == 2:  # searching by header (column title)
-        #if element in hash_tables:
+# return a specific value for a specific galaxy
+def valSearch(galaxy, attribute, hash_tables):
+    try:
+        result = hash_tables['Galaxy'].search(galaxy)
+    except TypeError:
+        print("ERROR: Galaxy", galaxy, "is not in database.")
+        return
+    val = result[0].get(attribute)
+    
+    if val == None:
+        print("ERROR:", attribute, "is not in database.")
+    return val
 
-           # print(f"\nData for header: {element}")
-            #print("----------------------------------------------------")
-
-            #for key, rows in hash_tables[element].table.items():
-               # for row in rows:
-                   # print(f"{element} for \"{row['Galaxy']}\": {row[element]}")
-       # else:
-
-                #print(f"\nHeader \'{element}\' not found in the hash tables.")
 
 # searches data column for data within given range (inclusive)
 # returns list of galaxies whose measurements fit range
@@ -70,13 +76,13 @@ def rangeSearch(attribute, lower, upper, hash_tables):
         print("Would you like to see uncheck galaxies?\n1. Yes\n2. No\n")
         choice = int(input("Enter selection: "))
         
-        # FIXME: respond to choices
-        # if you choose yes
-        for g in missed_galaxies:
-            print(g)
+        if choice == 1:
+            for g in missed_galaxies:
+                print(g)
                 
     return galaxies
-
+    
+    
 # searches data column for data within given value
 # returns list of galaxies that has value
 def matchSearch(attribute, target, hash_tables):
@@ -91,15 +97,6 @@ def matchSearch(attribute, target, hash_tables):
 
     return galaxies
 
-# returns all data from one column
-# not the same as returning the column, this is a List and not part of a HashTable
-def colSearch(attribute, hash_tables):
-    result = hash_tables[attribute].column()
-    vals = []
-    for i in result:
-        for j in hash_tables[attribute].search(i):
-            vals.append(i)
-    return vals
 
 # returns list of galaxies that fit multiple matchSearch / rangeSearch
 # user refines search in steps
@@ -107,7 +104,6 @@ def crossSearch(hash_tables):
     galaxies = colSearch("Galaxy", hash_tables)
     exit = False
     while not exit:
-        # FIXME: prompt user to do stuff
         choice = int(input("range (1), match (2), or exit (-1): "))
         # perform limiting search
         match choice:
@@ -129,5 +125,5 @@ def crossSearch(hash_tables):
             if galaxies.count(i) > 0:
                 save.append(i)
         galaxies = save
+        print("Search currently returns: ", len(galaxies))
     return galaxies
-
