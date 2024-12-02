@@ -1,6 +1,7 @@
 
 import csv
 from hash_table import HashTable
+import os
 
 #converts csv to hash table(s) to only have to load once
 def csv_to_hash(file_path):
