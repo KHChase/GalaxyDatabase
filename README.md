@@ -11,7 +11,8 @@ The program prompts the user for which search they would like to do:
 2. Search by column: User prompted to enter the column name they'd like to search for
 3. Search for a galaxy-specific value: User prompted for galaxy name and column title
 4. Search for multiple values: User will be prompted to search by range, search by match, or exit search
-\n
-**Search by range: prompts user for the column to search, and an upper and lower bound**
-**Search by match: Prompts user for the column to search, and the target value**
+
+           **Search by range: prompts user for the column to search, and an upper and lower bound**
+
+           **Search by match: Prompts user for the column to search, and the target value**
            
