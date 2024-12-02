@@ -23,7 +23,7 @@ def csv_to_hash(file_path):
     return hash_tables
 
 # write any modifications done back to the csv file
-def write_to_csv(galaxy_name, file_path, hash_tables):
+def write_to_csv(galaxy_name, file_path, hash_tables, index_cols):
 
     new_row = hash_tables["Galaxy"].search(galaxy_name)
     
