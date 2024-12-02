@@ -11,20 +11,21 @@
 
 # walks user through searching
 def perform(hash_tables):
-    # FIXME: prompt user to input their preferred search
     print("What would you like to search by? (Enter 1-4, or -1 to exit)")
-    print("1. Search by Galaxy")
-    print("2. Search for a Column")
-    print("3. Search for a galaxies specific value")
+    print("1. Search by galaxy")
+    print("2. Search by column")
+    print("3. Search for a galaxy's specific value")
     print("4. Search by multiple values")
     choice = int(input("\nSearch by: "))
     
     match choice:
+        case -1:
+            return
         case 1:
             g = input("\nEnter the galaxy name: ")
             results = galSearch(g, hash_tables)
         case 2:
-            a = input("\nEnter the Column Title: ")
+            a = input("\nEnter the column title: ")
             results = colSearch(a, hash_tables)
         case 3:
             g = input("Enter the galaxy name: ")
@@ -33,7 +34,7 @@ def perform(hash_tables):
             print(f"\n{a} for {g}: {results}")
         case 4:
             results = crossSearch(hash_tables)
-            choice2 = int(input("Print galaxies found? 1. Yes, 2. No: "))
+            choice2 = int(input("Print galaxies found?\n1. Yes\n2. No\nAnswer: "))
             if choice2 == 1:
                 for r in results:
                     galSearch(r, hash_tables)
@@ -52,7 +53,7 @@ def galSearch(galaxy, hash_tables):
             print("\n********************************************************")
         return result
     except TypeError:
-        print("ERROR: Galaxy ", galaxy, " is not in database.")
+        print("ERROR: Galaxy", galaxy, "is not in database.")
         return
 
 
@@ -62,7 +63,7 @@ def colSearch(attribute, hash_tables):
     try:
         result = hash_tables[attribute].column()
     except KeyError:
-        print("ERROR: ", attribute, "not in database.")
+        print("ERROR:", attribute, "not in database.")
         return []
 
     vals = []
@@ -145,17 +146,17 @@ def crossSearch(hash_tables):
     galaxies = colSearch("Galaxy", hash_tables)
     exit = False
     while not exit:
-        choice = int(input("range (1), match (2), or exit (-1): "))
+        choice = int(input("Search by range (1), search by match (2), or exit search (-1): "))
         # perform limiting search
         match choice:
             case 1:
-                attribute = input("attribute: ")
-                lower = float(input("lower bound: "))
-                upper = float(input("upper bound: "))
+                attribute = input("Attribute: ")
+                lower = float(input("Lower bound: "))
+                upper = float(input("Upper bound: "))
                 limit = rangeSearch(attribute, lower, upper, hash_tables)
             case 2:
-                attribute = input("attribute: ")
-                target = input("target: ")
+                attribute = input("Attribute: ")
+                target = input("Target: ")
                 limit = matchSearch(attribute, target, hash_tables)
             case -1:
                 exit = True
@@ -166,5 +167,5 @@ def crossSearch(hash_tables):
             if galaxies.count(i) > 0:
                 save.append(i)
         galaxies = save
-        print("Search currently returns: ", len(galaxies))
+        print("Search currently returns: ", len(galaxies), "\n")
     return galaxies
