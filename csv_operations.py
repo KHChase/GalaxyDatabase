@@ -23,9 +23,9 @@ def csv_to_hash(file_path):
     return hash_tables
 
 # write any modifications done back to the csv file
-def write_to_csv(galaxy_name, file_path, hash_tables, index_cols):
+def write_to_csv(galaxy_name, file_path, hash_tables):
 
-    new_row = hash_tables[index_cols[0]].search(galaxy_name)
+    new_row = hash_tables["Galaxy"].search(galaxy_name)
     
     # Check if the file already exists
     file_exists = os.path.exists(file_path)
@@ -40,5 +40,7 @@ def write_to_csv(galaxy_name, file_path, hash_tables, index_cols):
                 writer.writeheader()
             
             writer.writerows(new_row)
+            return True
         else:
             print("No data to append.")
+            return False
