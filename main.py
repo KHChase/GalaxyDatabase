@@ -15,7 +15,19 @@ def main():
     for col in hash_tables:
         index_cols.append(col)
 
-    search.perform(hash_tables)
+    print("Which would you like to do: ")
+    print("1. Perform a search")
+    print("2. Add a galaxy")
+    choice = int(input("Enter 1 or 2: "))
+
+    if choice == 1:
+        search.perform(hash_tables)
+    
+    elif choice == 2:
+        add_update.add_update(hash_tables, index_cols, file_path)
+    
+    else:
+        print("Invalid Choice")
 
 if __name__ == "__main__":
     main()
