@@ -14,7 +14,7 @@ def perform(hash_tables):
     # FIXME: prompt user to input their preferred search
     print("What would you like to search by? (Enter 1-4, or -1 to exit)")
     print("1. Search by galaxy")
-    print("2. Search for a column")
+    print("2. Search by column")
     print("3. Search for a galaxy's specific value")
     print("4. Search by multiple values")
     choice = int(input("\nSearch by: "))
