@@ -24,7 +24,7 @@ def main():
         search.perform(hash_tables)
     
     elif choice == 2:
-        add_update.add_update(hash_tables, index_cols, file_path)
+        add_update(hash_tables, index_cols, file_path)
     
     else:
         print("Invalid Choice")
