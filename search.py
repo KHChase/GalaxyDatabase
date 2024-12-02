@@ -31,6 +31,7 @@ def perform(hash_tables):
         case 2:
             a = input("\nEnter the column title: ")
             results = colSearch(a, hash_tables)
+            print(results)
         case 3:
             g = input("Enter the galaxy name: ")
             a = input("Enter the column title: ")
