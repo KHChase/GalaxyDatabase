@@ -15,7 +15,7 @@ def main():
     for col in hash_tables:
         index_cols.append(col)
 
-    perform(hash_tables)
+    search.perform(hash_tables)
 
 if __name__ == "__main__":
     main()
