@@ -9,8 +9,10 @@ def add_update(hash_tables, index_cols, file_path):
 
     if choice == 1:
         new_data = {}
+        print("To enter a tab, enter ~")
         for col in index_cols:
-            new_data[col] = input(f"{col}: ").strip()
+            value = input(f"{col}: ").strip()
+            new_data[col] = value.replace("~","\t")
 
         galaxy_name = new_data['Galaxy']
 
