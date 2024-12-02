@@ -3,7 +3,7 @@ CSCE A311 group project for the Astronomy Lab
 
 This program was created for use by the UAA Astronomy Lab.
 
-The main focus of this program is searching.
+The main focus of this program is searching and adding galaxy to the database.
 
 The program prompts the user for which search they would like to do:
 
@@ -15,4 +15,6 @@ The program prompts the user for which search they would like to do:
            **Search by range: prompts user for the column to search, and an upper and lower bound**
 
            **Search by match: Prompts user for the column to search, and the target value**
-           
+
+
+5. add_update: Prompts user for specific data for each cell
