@@ -1,12 +1,12 @@
 '''
-    searches
+    Functions:
+        perform - walks user through a search
         galSearch - return data for one galaxy
         colSearch - return data for one column
         valSearch - return a specific value for a specific galaxy
-        
         rangeSearch - return all galaxies with values in range
         matchSearch - return all galaxies with values that match
-        crossSearch - multiple of these
+        crossSearch - finds intersection of multiple crossSearch and/or matchSearch
 '''
 
 # walks user through searching
@@ -16,11 +16,15 @@ def perform(hash_tables):
     print("2. Search by column")
     print("3. Search for a galaxy's specific value")
     print("4. Search by multiple values")
-    choice = int(input("\nSearch by: "))
+    try:
+        choice = int(input("\nSearch by: "))
+    except ValueError:
+        print("ERROR: Invalid input.")
+        return perform(hash_tables)
     
     match choice:
         case -1:
-            return
+            return None
         case 1:
             g = input("\nEnter the galaxy name: ")
             results = galSearch(g, hash_tables)
@@ -31,7 +35,8 @@ def perform(hash_tables):
             g = input("Enter the galaxy name: ")
             a = input("Enter the column title: ")
             results = valSearch(g, a, hash_tables)
-            print(f"\n{a} for {g}: {results}")
+            if results != None:
+                print(f"\n{a} for {g}: {results}")
         case 4:
             results = crossSearch(hash_tables)
             choice2 = int(input("Print galaxies found?\n1. Yes\n2. No\nAnswer: "))
@@ -64,7 +69,7 @@ def colSearch(attribute, hash_tables):
         result = hash_tables[attribute].column()
     except KeyError:
         print("ERROR:", attribute, "not in database.")
-        return []
+        return None
 
     vals = []
     for i in result:
@@ -76,11 +81,11 @@ def colSearch(attribute, hash_tables):
 
 # return a specific value for a specific galaxy
 def valSearch(galaxy, attribute, hash_tables):
-    try:
-        result = hash_tables['Galaxy'].search(galaxy)
-    except TypeError:
+    result = hash_tables['Galaxy'].search(galaxy)
+    if result == None:
         print("ERROR: Galaxy", galaxy, "is not in database.")
         return
+        
     val = result[0].get(attribute)
     
     if val == None:
@@ -94,7 +99,11 @@ def rangeSearch(attribute, lower, upper, hash_tables):
     galaxies = []
     missed_galaxies = []
     missed = False
-    data = hash_tables[attribute].column()
+    try:
+        data = hash_tables[attribute].column()
+    except KeyError:
+        print("ERROR:", attribute, "is not in database")
+        return None
         
     for i in data:
         # check for range if possible
@@ -111,11 +120,12 @@ def rangeSearch(attribute, lower, upper, hash_tables):
             
     # let user know about missed_galaxies
     if missed:
-        print("Not all galaxies were able to be checked for range.")
-        print("Would you like to see uncheck galaxies?\n1. Yes\n2. No\n")
+        print("\nNot all galaxies were able to be checked for range.")
+        print("Would you like to see uncheck galaxies?\n1. Yes\n2. No")
         choice = int(input("Enter 1 or 2: "))
         
         if choice == 1:
+            print("")
             for g in missed_galaxies:
                 print(g)
                 
@@ -130,6 +140,7 @@ def matchSearch(attribute, target, hash_tables):
         data = hash_tables[attribute].column()
     except KeyError:
         print("ERROR: ", attribute, "not in database.")
+        return None
 
     for i in data:
         # since this is checking strings it should
@@ -146,7 +157,7 @@ def crossSearch(hash_tables):
     galaxies = colSearch("Galaxy", hash_tables)
     exit = False
     while not exit:
-        choice = int(input("Search by range (1), search by match (2), or exit search (-1): "))
+        choice = int(input("\nSearch by range (1), search by match (2), or exit search (-1): "))
         # perform limiting search
         match choice:
             case 1:
@@ -162,10 +173,11 @@ def crossSearch(hash_tables):
                 exit = True
                 
         # update limit_tables to reflect search
-        save = []
-        for i in limit:
-            if galaxies.count(i) > 0:
-                save.append(i)
-        galaxies = save
-        print("Search currently returns: ", len(galaxies), "\n")
+        if limit != None:
+            save = []
+            for i in limit:
+                if galaxies.count(i) > 0:
+                    save.append(i)
+            galaxies = save
+            print("\nSearch currently returns: ", len(galaxies), "galaxies\n")
     return galaxies
