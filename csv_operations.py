@@ -23,29 +23,24 @@ def csv_to_hash(file_path):
     return hash_tables
 
 # write any modifications done back to the csv file
-def write_to_csv(file_path, hash_tables, index_cols):
+def write_to_csv(galaxy_name, file_path, hash_tables, index_cols):
 
-    primary_index = index_cols[0]
-    unique_rows = []
-    seen = set()  # To track unique galaxy names
-    
-    for galaxy_name, rows in hash_tables[primary_index].table.items():
-        if galaxy_name not in seen:
-            unique_rows.extend(rows)
-            seen.add(galaxy_name)
+    new_row = hash_tables["Galaxy"].search(galaxy_name)
     
     # Check if the file already exists
     file_exists = os.path.exists(file_path)
     
     # Write the data to the CSV file in append mode
     with open(file_path, mode='a', newline='') as file:
-        if unique_rows:
+        if new_row:
             writer = csv.DictWriter(file, fieldnames=index_cols)
             
             # Write the header only if the file does not exist or is empty
             if not file_exists or os.stat(file_path).st_size == 0:
                 writer.writeheader()
             
-            writer.writerows(unique_rows)
+            writer.writerows(new_row)
+            return True
         else:
             print("No data to append.")
+            return False
