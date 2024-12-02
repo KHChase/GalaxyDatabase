@@ -39,7 +39,7 @@ def galSearch(galaxy, hash_tables):
             for header in row:
                 print(header, ": ", row[header])
             print("\n********************************************************")
-        return result;
+        return result
     except TypeError:
         print("ERROR: Galaxy ", galaxy, " is not in database.")
         return
