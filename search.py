@@ -24,7 +24,7 @@ def perform(hash_tables):
             g = input("\nEnter the galaxy name: ")
             results = galSearch(g, hash_tables)
         case 2:
-            a = input("\nEnter the column Title: ")
+            a = input("\nEnter the column title: ")
             results = colSearch(a, hash_tables)
         case 3:
             g = input("Enter the galaxy name: ")
