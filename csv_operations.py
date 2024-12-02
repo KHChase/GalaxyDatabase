@@ -25,7 +25,7 @@ def csv_to_hash(file_path):
 # write any modifications done back to the csv file
 def write_to_csv(file_path, hash_tables, index_cols):
 
-    primary_index = 'Galaxy'  # Adjust this based on your hash table structure
+    primary_index = index_cols[0]
     unique_rows = []
     seen = set()  # To track unique galaxy names
     
